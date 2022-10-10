@@ -1,2 +1,4 @@
-.idea
-venv_car_park
+.idea/
+venv_car_park/
+/backend/static
+/backend/freeze_req.txt
