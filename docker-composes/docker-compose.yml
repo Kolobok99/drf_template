@@ -1,11 +1,11 @@
 version: '3.8'
 
 volumes:
-  postgres_data:
+  car_park_dev_postgres_data:
 
 services:
   car_park_dev_web:
-    container_name: nots_dev_web_container
+    container_name: car_park_dev_web_container
     build: ../backend
     command: bash -c "
       python manage.py flush --no-input
@@ -36,14 +36,14 @@ services:
 
 
   car_park_dev_db:
-    container_name: nots_dev_db_container
+    container_name: cara_park_dev_db_container
     image: postgres
     expose:
       - 5432
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - car_park_dev_postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=dev_db
       - POSTGRES_USER=manager
