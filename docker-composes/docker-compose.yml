@@ -1,7 +1,7 @@
-version: '3.8'
+version: '3.3'
 
 volumes:
-  car_park_dev_postgres_data:
+  dev_postgres_data:
 
 services:
   car_park_dev_web:
@@ -43,7 +43,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - car_park_dev_postgres_data:/var/lib/postgresql/data
+      - dev_postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=dev_db
       - POSTGRES_USER=manager
