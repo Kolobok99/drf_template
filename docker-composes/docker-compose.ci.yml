@@ -4,9 +4,12 @@ volumes:
   prod_postgres_data:
   prod_static_volume:
 
+networks:
+  default:
+    name: car_park_prod_network
 
 services:
-  car_park_prod_web:
+  prod_web:
     container_name: car_park_prod_web_container
     build:
       context: ../backend
@@ -18,14 +21,14 @@ services:
       && gunicorn core.wsgi:application --bind 0.0.0.0:8000 --reload
       "
     volumes:
-      - car_park_prod_static_volume:/web/static
+      - prod_static_volume:/web/static
     expose:
       - 8000
     env_file: ../backend/.env_files.prod/.env.prod.settings
     depends_on:
-      - cara_park_prod_db
+      - prod_db
 
-  car_park_prod_db:
+  prod_db:
     container_name: car_park_prod_db_container
     image: postgres
     volumes:
@@ -39,16 +42,16 @@ services:
 
 
 
-  car_park_prod_nginx:
+  prod_nginx:
     container_name: car_park_prod_nginx_container
     build:
       context: ../nginx.prod
     image: "${NGINX_IMAGE}"
     volumes:
-      - car_park_prod_static_volume:/web/static
+      - prod_static_volume:/web/static
     ports:
       - "80:80"
     depends_on:
-      - nots_prod_web
+      - prod_web
 
 

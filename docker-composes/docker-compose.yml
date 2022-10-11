@@ -1,10 +1,14 @@
-version: '3.3'
+version: '3.8'
 
 volumes:
   dev_postgres_data:
 
+networks:
+  default:
+    name: car_park_dev_network
+
 services:
-  car_park_dev_web:
+  dev_web:
     container_name: car_park_dev_web_container
     build: ../backend
     command: bash -c "
@@ -18,7 +22,7 @@ services:
     expose:
       - 8000
     ports:
-      - 8000:8000
+      - "8000:8000"
     environment:
       - DEBUG=1
       - SECRET_KEY=very_secret_key
@@ -26,16 +30,16 @@ services:
       - POSTGRES_NAME=dev_db
       - POSTGRES_USER=manager
       - POSTGRES_PASSWORD=manager_password
-      - POSTGRES_HOST=car_park_dev_db
+      - POSTGRES_HOST=dev_db
       - POSTGRES_PORT=5432
 
       - DATABASE=postgres
     depends_on:
-      - car_park_dev_db
+      - dev_db
     entrypoint: ./scripts/wait_db.sh
 
 
-  car_park_dev_db:
+  dev_db:
     container_name: cara_park_dev_db_container
     image: postgres
     expose:
