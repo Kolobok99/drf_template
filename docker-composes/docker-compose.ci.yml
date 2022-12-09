@@ -6,11 +6,11 @@ volumes:
 
 networks:
   default:
-    name: car_park_prod_network
+    name: drf_template_prod_network
 
 services:
   prod_web:
-    container_name: car_park_prod_web_container
+    container_name: drf_template_prod_web_container
     build:
       context: ../backend
       dockerfile: Dockerfile.prod
@@ -29,7 +29,7 @@ services:
       - prod_db
 
   prod_db:
-    container_name: car_park_prod_db_container
+    container_name: drf_template_prod_db_container
     image: postgres
     volumes:
       - prod_postgres_data:/var/lib/postgresql/data
@@ -43,7 +43,7 @@ services:
 
 
   prod_nginx:
-    container_name: car_park_prod_nginx_container
+    container_name: drf_template_prod_nginx_container
     build:
       context: ../nginx.prod
     image: "${NGINX_IMAGE}"

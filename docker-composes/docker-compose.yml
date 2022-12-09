@@ -5,11 +5,11 @@ volumes:
 
 networks:
   default:
-    name: car_park_dev_network
+    name: drf_template_dev_network
 
 services:
   dev_web:
-    container_name: car_park_dev_web_container
+    container_name: drf_template_dev_web_container
     build: ../backend
     command: bash -c "
       python manage.py flush --no-input
@@ -40,7 +40,7 @@ services:
 
 
   dev_db:
-    container_name: cara_park_dev_db_container
+    container_name: drf_template_dev_db_container
     image: postgres
     expose:
       - 5432

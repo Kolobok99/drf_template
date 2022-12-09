@@ -1,4 +1,4 @@
 .idea/
-venv_car_park/
+venv_drf_template/
 /backend/static
 /backend/freeze_req.txt
